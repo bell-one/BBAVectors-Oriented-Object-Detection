@@ -7,21 +7,22 @@ from .DOTA_devkit.ResultMerge_multi_process import mergebypoly
 class DOTA(BaseDataset):
     def __init__(self, data_dir, phase, input_h=None, input_w=None, down_ratio=None):
         super(DOTA, self).__init__(data_dir, phase, input_h, input_w, down_ratio)
-        self.category = ['plane',
-                         'baseball-diamond',
-                         'bridge',
-                         'ground-track-field',
-                         'small-vehicle',
-                         'large-vehicle',
-                         'ship',
-                         'tennis-court',
-                         'basketball-court',
-                         'storage-tank',
-                         'soccer-ball-field',
+        self.category = ['small-car',
+                         'truck',
+                         'small-ship',
+                         'train',
+                         'bus',
+                         'military-aircraft',
+                         'oil-tank',
+                         'etc',
+                         'civilian-aircraft',
+                         'large-ship',
+                         'crane',
+                         'helipad',
                          'roundabout',
-                         'harbor',
-                         'swimming-pool',
-                         'helicopter'
+                         'bridge',
+                         'athletic-field',
+                         'dam'
                          ]
         self.color_pans = [(204,78,210),
                            (0,192,255),
@@ -37,7 +38,8 @@ class DOTA(BaseDataset):
                            (17,90,197),
                            (0,255,255),
                            (102,255,102),
-                           (255,255,0)]
+                           (255,255,0),
+                           (255,255,128)]
         self.num_classes = len(self.category)
         self.cat_ids = {cat:i for i,cat in enumerate(self.category)}
         self.img_ids = self.load_img_ids()
