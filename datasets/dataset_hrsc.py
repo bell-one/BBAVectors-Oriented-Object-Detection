@@ -3,7 +3,7 @@ import os
 import cv2
 import numpy as np
 import sys
-from .DOTA_devkit.hrsc_evaluation_task1 import voc_eval
+#from .DOTA_devkit.hrsc_evaluation_task1 import voc_eval
 
 
 if sys.version_info[0] == 2:
@@ -91,35 +91,35 @@ class HRSC(BaseDataset):
         #     exit()
         return annotation
 
-    def dec_evaluation(self, result_path):
-        detpath = os.path.join(result_path, 'Task1_{}.txt')
-        annopath = os.path.join(self.label_path, '{}.xml')  # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
-        imagesetfile = os.path.join(self.data_dir, 'test.txt')
-        classaps = []
-        map = 0
-        for classname in self.category:
-            if classname == 'background':
-                continue
-            print('classname:', classname)
-            rec, prec, ap = voc_eval(detpath,
-                                     annopath,
-                                     imagesetfile,
-                                     classname,
-                                     ovthresh=0.5,
-                                     use_07_metric=True)
-            map = map + ap
-            # print('rec: ', rec, 'prec: ', prec, 'ap: ', ap)
-            print('{}:{} '.format(classname, ap*100))
-            classaps.append(ap)
-            # umcomment to show p-r curve of each category
-            # plt.figure(figsize=(8,4))
-            # plt.xlabel('recall')
-            # plt.ylabel('precision')
-            # plt.plot(rec, prec)
-        # plt.show()
-        map = map / len(self.category)
-        print('map:', map*100)
-        # classaps = 100 * np.array(classaps)
-        # print('classaps: ', classaps)
-        return map
+    # def dec_evaluation(self, result_path):
+    #     detpath = os.path.join(result_path, 'Task1_{}.txt')
+    #     annopath = os.path.join(self.label_path, '{}.xml')  # change the directory to the path of val/labelTxt, if you want to do evaluation on the valset
+    #     imagesetfile = os.path.join(self.data_dir, 'test.txt')
+    #     classaps = []
+    #     map = 0
+    #     for classname in self.category:
+    #         if classname == 'background':
+    #             continue
+    #         print('classname:', classname)
+    #         rec, prec, ap = voc_eval(detpath,
+    #                                  annopath,
+    #                                  imagesetfile,
+    #                                  classname,
+    #                                  ovthresh=0.5,
+    #                                  use_07_metric=True)
+    #         map = map + ap
+    #         # print('rec: ', rec, 'prec: ', prec, 'ap: ', ap)
+    #         print('{}:{} '.format(classname, ap*100))
+    #         classaps.append(ap)
+    #         # umcomment to show p-r curve of each category
+    #         # plt.figure(figsize=(8,4))
+    #         # plt.xlabel('recall')
+    #         # plt.ylabel('precision')
+    #         # plt.plot(rec, prec)
+    #     # plt.show()
+    #     map = map / len(self.category)
+    #     print('map:', map*100)
+    #     # classaps = 100 * np.array(classaps)
+    #     # print('classaps: ', classaps)
+    #     return map
 
